@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+        <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.baizhi.travels.dao.PlaceDAO">
+
+<!--根据省份id查询所有的景点信息并排序-->
+<!--resultType是传入参数类型，由于已经起了别名，则可以直接写类名 Place-->
+<select id="findByProvinceIdPage" resultType="com.baizhi.travels.entity.Place">
+    select
+    id, name, picpath, hottime, hotticket, dimticket, placedes, provinceid
+    from t_place
+    where provinceid = #{provinceId}
+    order by hotticket
+    limit #{start}, #{rows}
+</select>
+
+<!--根据省份id查询当前省份所有景点的个数-->
+<select id="findByProvinceIdCounts" parameterType="String" resultType="Integer">
+    select count(id) from t_place where provinceid = #{provinceId}
+</select>
+
+    <!--保存place-->
+    <insert id="save" parameterType="Place" useGeneratedKeys="true" keyProperty="id">
+        insert into t_place VALUES (#{id},#{name},#{picpath},#{hottime},#{hotticket},#{dimticket},#{placedes},#{provinceid})
+    </insert>
+
+    <!--根据id查询景点信息-->
+    <select id="findOne" parameterType="String" resultType="Place">
+        select
+        id, name, picpath, hottime, hotticket, dimticket, placedes, provinceid
+    from t_place
+    where id=#{id}
+    </select>
+
+    <!--删除景点信息方法-->
+    <delete id="delete" parameterType="String">
+        delete from t_place where id=#{id}
+    </delete>
+
+</mapper>

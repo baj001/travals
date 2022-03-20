@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.baizhi.travels.dao.UserDao">
+
+    <!--查询  可以使用这个方法来代替用户登录-->
+    <select id="findByUsername" parameterType="String" resultType="User">
+        select * from t_user where username = #{username}
+    </select>
+
+    <!--注册用户-->
+    <insert id="save" parameterType="User" useGeneratedKeys="true" keyProperty="id">
+        insert into t_user values(#{id},#{username},#{password},#{email})
+    </insert>
+
+
+
+</mapper>
