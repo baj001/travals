@@ -10,6 +10,7 @@ public class GCUseTest {
     public static void main(String[] args)  {
         ArrayList<byte[]> list = new ArrayList<>();
 
+// git修改测试
         while(true){
             //定义一个arr数组长度为100 将list添加到arr中
             byte[] arr = new byte[100];
